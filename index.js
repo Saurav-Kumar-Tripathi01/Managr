@@ -33,6 +33,12 @@ const client = new Client({
 //maps for the ability to save music
 client.queues = new Map();
 
+//maps for saving chat queue
+client.chatSessions = new Map();
+
+//adding cooldown
+client.cooldowns = new Collection();
+
 // Initialize the database
 const db = new Database("bot.db", { verbose: console.log });
 client.db = db; // Attach the database to the client object
@@ -90,6 +96,18 @@ const createInventoriesTable = db.prepare(`
     );
 `);
 createInventoriesTable.run();
+
+// Create the afk table
+const createAfkTable = db.prepare(`
+    CREATE TABLE IF NOT EXISTS afk (
+        guildId TEXT NOT NULL,
+        userId TEXT NOT NULL,
+        message TEXT,
+        timestamp INTEGER NOT NULL,
+        PRIMARY KEY (guildId, userId)
+    );
+`);
+createAfkTable.run();
 
 // Add the logChannelId column to the settings table if it doesn't exist
 try {
