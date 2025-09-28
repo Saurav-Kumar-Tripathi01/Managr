@@ -4,6 +4,9 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
+# --- ADD THIS PACKAGES BLOCK ---
+[nix.pkgs]
+deps = ["nodejs-20_x", "ffmpeg-full", "libuuid"]
 
 [workflows]
 runButton = "Project"
