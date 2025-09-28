@@ -4,6 +4,7 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
+packages = ["libuuid", "cairo", "pango", "libjpeg", "giflib", "pkg-config"]
 # --- ADD THIS PACKAGES BLOCK ---
 [nix.pkgs]
 deps = ["nodejs-20_x", "ffmpeg-full", "libuuid"]
